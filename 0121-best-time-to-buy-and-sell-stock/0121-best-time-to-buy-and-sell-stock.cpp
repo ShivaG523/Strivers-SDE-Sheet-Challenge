@@ -2,7 +2,6 @@ class Solution {
 public:
     int maxProfit(vector<int>& arr) {
        int mn=INT_MAX;
-        int mx=INT_MIN;
         int ans=0;
         for(int i=0;i<arr.size();i++){
             if(mn>arr[i])
