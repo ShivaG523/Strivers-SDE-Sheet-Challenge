@@ -10,16 +10,14 @@ class Solution{
     {
         // Your code goes here
         
-        sort(updates,updates+k);
-        int i=n-1;
-        while(k){
-            if(updates[k-1]<=(i+1)){
-            a[i]=k;
-            i--;
-            }else
-            k--;
-        
+     for(int i=0;i<k;i++){
+            a[updates[i]-1]++;
         }
+        for(int j=1;j<n;j++){
+            a[j]=a[j]+a[j-1];
+        }
+
+        
         
     }
 };
