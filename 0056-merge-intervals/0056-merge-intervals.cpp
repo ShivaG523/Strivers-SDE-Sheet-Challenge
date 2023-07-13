@@ -1,31 +1,26 @@
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
-         sort(intervals.begin(), intervals.end());
-          reverse(intervals.begin(), intervals.end());
+    vector<vector<int>> merge(vector<vector<int>>& arr) {
+         vector<vector<int>> ans;
+      int n=arr.size();
+        sort(arr.begin(),arr.end());
+    for (int i = 0; i < n; i++) { 
+        int start = arr[i][0];
+        int end = arr[i][1];
 
-        int n=intervals.size();
-        vector<vector<int>>ans;
-        int i;
-        for(i=n-1;i>0;i--){
-            if(intervals[i][1]>=intervals[i-1][0]){
-                
-                vector<int>v;
-                v.push_back(intervals[i][0]);
-                v.push_back(max(intervals[i-1][1],intervals[i][1]));              
-            intervals.erase(intervals.begin() + i);
-            intervals.erase(intervals.begin() + i-1);
-            intervals.push_back(v);
-                v.clear();
-            }
-            else{
-                ans.push_back(intervals[i]);
-                intervals.pop_back();}
+        if (!ans.empty() && end <= ans.back()[1]) {
+            continue;
         }
-        
-        ans.push_back(intervals[i]);
-            sort(ans.begin(),ans.end());
-             return ans;
-   
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j][0] <= end) {
+                end = max(end, arr[j][1]);
+            }
+            else {
+                break;
+            }
+        }
+        ans.push_back({start, end});
+    }
+    return ans;
     }
 };
